@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS time (
 songplay_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) \
                             ON CONFLICT (songplay_id) DO NOTHING").format(sql.Identifier('songplays'))
 
-user_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s) ON CONFLICT (user_id) DO NOTHING").format(sql.Identifier('users'))
+user_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s) ON CONFLICT (user_id) DO UPDATE SET first_name = EXCLUDED.first_name, last_name = EXCLUDED.last_name, gender = EXCLUDED.gender, level = EXCLUDED.level").format(sql.Identifier('users'))
 
 song_table_insert = sql.SQL("INSERT INTO {} VALUES (%s, %s, %s, %s, %s) ON CONFLICT (song_id) DO NOTHING").format(sql.Identifier('songs'))
 
