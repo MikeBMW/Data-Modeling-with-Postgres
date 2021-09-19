@@ -13,13 +13,13 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays (
-    songplay_id TEXT PRIMARY KEY, 
+    songplay_id SERIAL PRIMARY KEY, 
     start_time TEXT, 
-    user_id INT, 
+    user_id INT NOT NULL, 
     level TEXT, 
-    song_id TEXT, 
-    artist_id TEXT, 
-    session_id INT, 
+    song_id TEXT NOT NULL, 
+    artist_id TEXT NOT NULL, 
+    session_id INT NOT NULL, 
     location TEXT, 
     user_agent TEXT
 )
@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS songplays (
 user_table_create = ("""
 CREATE TABLE IF NOT EXISTS users(
     user_id INT PRIMARY KEY, 
-    first_name TEXT, 
-    last_name TEXT, 
+    first_name TEXT NOT NULL, 
+    last_name TEXT NOT NULL, 
     gender TEXT, 
     level TEXT
 );
@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS users(
 
 song_table_create = ("""
 CREATE TABLE IF NOT EXISTS songs(
-    song_id TEXT PRIMARY KEY, 
+    song_id SERIAL PRIMARY KEY, 
     title TEXT NOT NULL, 
-    artist_id TEXT NOT NULL, 
+    artist_id SERIAL NOT NULL, 
     year INT NOT NULL, 
     duration NUMERIC NOT NULL
 );
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS songs(
 
 artist_table_create = ("""
 CREATE TABLE IF NOT EXISTS artists(
-    artist_id  TEXT PRIMARY KEY, 
+    artist_id  SERIAL PRIMARY KEY, 
     name TEXT NOT NULL, 
     location TEXT, 
     latitude NUMERIC, 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS artists(
 
 time_table_create = ("""
 CREATE TABLE IF NOT EXISTS time (
-    start_time TIMESTAMP, 
+    start_time TIMESTAMP PRIMARY KEY, 
     hour INT NOT NULL, 
     day INT NOT NULL, 
     week INT NOT NULL, 
